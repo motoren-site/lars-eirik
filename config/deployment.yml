@@ -12,9 +12,9 @@ spec:
       k8s-app: lars-eirik
   template:
     metadata:
-      name: eirik
+      name: lars-eirik
       labels:
-        k8s-app: eirik
+        k8s-app: lars-eirik
     spec:
       containers:
         - name: lars-eirik
