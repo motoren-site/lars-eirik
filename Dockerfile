@@ -6,8 +6,6 @@ COPY src /tmp/src/
 RUN ./gradlew build
 
 FROM openjdk:17-jdk-alpine
-ENV APP_HOME=/usr/app/
-WORKDIR /tmp/
-COPY --from=TEMP_BUILD_IMAGE /tmp/build/libs/lars-eirik-0.0.1-SNAPSHOT.jar .
+COPY --from=TEMP_BUILD_IMAGE /tmp/build/libs/*.jar app.jar
 EXPOSE 8080
-CMD ["java","-jar",lars-eirik-0.0.1-SNAPSHOT.jar]
+CMD ["java","-jar","/app.jar"]
