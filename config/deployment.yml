@@ -1,21 +1,30 @@
-apiVersion: apps/v1
 kind: Deployment
+apiVersion: apps/v1
 metadata:
-  name: lars-eirik-deployment
+  name: lars-eirik
+  namespace: apps
   labels:
-    app: lars-eirik
+    k8s-app: lars-eirik
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: lars-eirik
+      k8s-app: lars-eirik
   template:
     metadata:
+      name: eirik
       labels:
-        app: lars-eirik
+        k8s-app: eirik
     spec:
       containers:
-      - name: lars-eirik
-        image: <IMAGE>
-        ports:
-        - containerPort: 80
+        - name: lars-eirik
+          image: <IMAGE>
+          imagePullPolicy: Always
+          securityContext:
+            privileged: false
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+  strategy:
+    type: RollingUpdate
+  minReadySeconds: 5
