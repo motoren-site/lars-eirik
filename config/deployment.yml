@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lars-eirik-deployment
+  labels:
+    app: lars-eirik
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: lars-eirik
+  template:
+    metadata:
+      labels:
+        app: lars-eirik
+    spec:
+      containers:
+      - name: lars-eirik
+        image: <IMAGE>
+        ports:
+        - containerPort: 80
